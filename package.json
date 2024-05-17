@@ -1,0 +1,26 @@
+{
+  "name": "clevercloud-backend",
+  "version": "1.0.0",
+  "description": "this will act as the backend for our database project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "AveryBrockington",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/averybrockington/clevercloud-database.git"
+  },
+  "bugs": {
+    "url": "https://github.com/averybrockington/clevercloud-database/issues"
+  },
+  "homepage": "https://github.com/averybrockington/clevercloud-database#readme"
+}
