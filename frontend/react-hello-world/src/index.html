@@ -14,11 +14,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body class="is-preload">
-
-		<!-- Wrapper -->
 			<div id="wrapper">
-
-				<!-- Intro -->
 					<section class="intro">
 						<header>
 							<h1>User Profile</h1>
@@ -27,7 +23,7 @@
 					</section>
           <section>
 						<header>
-							<h2>Log in or create a new profile</h2>
+							<h2>Sign in to Your Profile</h2>
 						</header>
 						<div class="content">
 
@@ -42,7 +38,6 @@
 								</div>
 								<ul class="actions">
 									<li><input type="submit" value="Log in" class="button primary" /></li>
-									<li><input type="button" value="Create a new profile" class="button" onclick="navigateToCreateProfile()"/></li>
 								</ul>
 							</form>
 						</div>
@@ -50,10 +45,6 @@
 
 					<!-- Section -->
 					<section>
-						<div class="content">
-							<span class="image fill" data-position="center"><img src="images/pic03.jpg" alt="" /></span>
-						</div>
-
 						<div id="createProfileSection">
 							<h2>Create a New Profile</h2>
 							<form id="createProfileForm" method="post" action="create_profile.php">
@@ -78,25 +69,14 @@
 									</div>
 								</div>
 								<ul class="actions">
-									<li><input type="submit" value="Create Profile" class="button" /></li>
+								<li><input type="submit" value="Create Profile" class="button" /></li>
 								</ul>
 							</form>
 						</div>
-						
-						
-
-						<script>
-							function navigateToCreateProfile() {
-								document.getElementById('createProfileSection').scrollIntoView({ behavior: 'smooth' });
-							}
-						</script>
 					</body>
 					</html>
-						
         </section>
-
 			</div>
-
   </head>
   <body>
     <div id="root"></div>
