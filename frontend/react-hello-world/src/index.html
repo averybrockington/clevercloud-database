@@ -4,7 +4,99 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <html>
+	<head>
+		<title>User Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section class="intro">
+						<header>
+							<h1>User Profile</h1>
+							<p> Log in to view account data</p>
+						</header>
+					</section>
+          <section>
+						<header>
+							<h2>Log in or create a new profile</h2>
+						</header>
+						<div class="content">
+
+							<form id="loginForm" method="post" action="login.php">
+								<div class="fields">
+									<div class="field half">
+										<input type="text" name="username" id="username" placeholder="Username" />
+									</div>
+									<div class="field half">
+										<input type="password" name="password" id="password" placeholder="Password" />
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Log in" class="button primary" /></li>
+									<li><input type="button" value="Create a new profile" class="button" onclick="navigateToCreateProfile()"/></li>
+								</ul>
+							</form>
+						</div>
+					</section>
+
+					<!-- Section -->
+					<section>
+						<div class="content">
+							<span class="image fill" data-position="center"><img src="images/pic03.jpg" alt="" /></span>
+						</div>
+
+						<div id="createProfileSection">
+							<h2>Create a New Profile</h2>
+							<form id="createProfileForm" method="post" action="create_profile.php">
+								<div class="fields">
+									<div class="field half">
+										<input type="text" name="newUsername" id="newUsername" placeholder="Username" />
+									</div>
+									<div class="field half">
+										<input type="text" name="firstName" id="firstName" placeholder="First Name" />
+									</div>
+									<div class="field half">
+										<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
+									</div>
+									<div class="field half">
+										<input type="email" name="email" id="email" placeholder="Email" />
+									</div>
+									<div class="field half">
+										<input type="password" name="newPassword" id="newPassword" placeholder="Password" />
+									</div>
+									<div class="field half">
+										<input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" />
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Create Profile" class="button" /></li>
+								</ul>
+							</form>
+						</div>
+						
+						
+
+						<script>
+							function navigateToCreateProfile() {
+								document.getElementById('createProfileSection').scrollIntoView({ behavior: 'smooth' });
+							}
+						</script>
+					</body>
+					</html>
+						
+        </section>
+
+			</div>
+
   </head>
   <body>
     <div id="root"></div>
