@@ -16,7 +16,7 @@ const CreateProfileForm = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3000/create-profile', {
+      const response = await axios.post('http://localhost:3306/create-profile', {
         newUsername,
         firstName,
         lastName,
