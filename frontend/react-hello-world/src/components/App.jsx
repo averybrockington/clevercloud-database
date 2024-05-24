@@ -1,16 +1,16 @@
 import React from 'react';
 import LoginForm from './components/LoginForm';
 import CreateProfileForm from './components/CreateProfileForm';
-import './App.css';
+import './App.css'; // Import any styles for the App component
 
 function App() {
   return (
     <div className="App">
       <h1>User Profile</h1>
       <p>Log in to view account data</p>
-      <LoginForm />
+      <LoginForm /> {/* Login form component */}
       <h2>Create a New Profile</h2>
-      <CreateProfileForm />
+      <CreateProfileForm /> {/* Profile creation form component */}
     </div>
   );
 }
