@@ -14,7 +14,7 @@ sequelize.authenticate()
         console.error('Unable to connect to the database:', error);
     });
 
-// Define your models using Sequelize
+// Define models using Sequelize
 const item = sequelize.define('item', {
   
 FirstName: {type:DataTypes.STRING},
@@ -23,11 +23,10 @@ FullName: {type:DataTypes.INTEGER},
 Username:  {type:DataTypes.STRING},
 Password:  {type:DataTypes.STRING},
 LoginInfo: {type:DataTypes.INTEGER},
-UserProfile:      {type:DataTypes.INTEGER},
-
+UserProfile:{type:DataTypes.INTEGER},
 });
 
-// Sync your models with the database
+// Sync models with the database
 sequelize.sync()
   .then(() => {
     console.log('Database synced successfully');
