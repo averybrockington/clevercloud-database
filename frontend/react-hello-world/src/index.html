@@ -5,71 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Login</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="assets/css/main.css" />
   </head>
-  <body class="is-preload">
-    <div id="wrapper">
-      <section class="intro">
-        <header>
-          <h1>User Profile</h1>
-          <p>Log in to view account data</p>
-        </header>
-      </section>
-      <section>
-        <header>
-          <h2>Sign in to Your Profile</h2>
-        </header>
-        <div class="content">
-          <form id="loginForm" method="post" action="/login">
-            <div class="fields">
-              <div class="field half">
-                <input type="text" name="username" id="username" placeholder="Username" />
-              </div>
-              <div class="field half">
-                <input type="password" name="password" id="password" placeholder="Password" />
-              </div>
-            </div>
-            <ul class="actions">
-              <li><input type="submit" value="Log in" class="button primary" /></li>
-            </ul>
-          </form>
-        </div>
-      </section>
-      <section>
-        <div id="createProfileSection">
-          <h2>Create a New Profile</h2>
-          <form id="createProfileForm" method="post" action="/createProfile">
-            <div class="fields">
-              <div class="field half">
-                <input type="text" name="newUsername" id="newUsername" placeholder="Username" />
-              </div>
-              <div class="field half">
-                <input type="text" name="firstName" id="firstName" placeholder="First Name" />
-              </div>
-              <div class="field half">
-                <input type="text" name="lastName" id="lastName" placeholder="Last Name" />
-              </div>
-              <div class="field half">
-                <input type="email" name="email" id="email" placeholder="Email" />
-              </div>
-              <div class="field half">
-                <input type="password" name="newPassword" id="newPassword" placeholder="Password" />
-              </div>
-              <div class="field half">
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" />
-              </div>
-            </div>
-            <ul class="actions">
-              <li><input type="submit" value="Create Profile" class="button" /></li>
-            </ul>
-          </form>
-        </div>
-      </section>
-    </div>
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const CreateProfileForm = () => {
   const [newUsername, setNewUsername] = useState('');
@@ -16,14 +15,25 @@ const CreateProfileForm = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:3306/create-profile', {
-        newUsername,
-        firstName,
-        lastName,
-        email,
-        newPassword,
+      const response = await fetch('http://localhost:3306/create-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          newUsername,
+          firstName,
+          lastName,
+          email,
+          newPassword,
+        }),
       });
-      alert(response.data);
+      if (response.ok) {
+        const data = await response.text();
+        alert(data);
+      } else {
+        alert('Error creating profile');
+      }
     } catch (error) {
       alert('Error creating profile');
     }
@@ -85,3 +95,4 @@ const CreateProfileForm = () => {
 };
 
 export default CreateProfileForm;
+

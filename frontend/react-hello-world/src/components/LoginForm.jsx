@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -8,11 +7,19 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3306/login', {
-        username,
-        password,
+      const response = await fetch('http://localhost:3306/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
-      alert(response.data);
+      if (response.ok) {
+        const data = await response.text();
+        alert(data);
+      } else {
+        alert('Error logging in');
+      }
     } catch (error) {
       alert('Error logging in');
     }
