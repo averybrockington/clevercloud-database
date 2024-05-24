@@ -4,7 +4,6 @@ const CreateProfileForm = () => {
   const [newUsername, setNewUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -24,7 +23,6 @@ const CreateProfileForm = () => {
           newUsername,
           firstName,
           lastName,
-          email,
           newPassword,
         }),
       });
@@ -63,14 +61,6 @@ const CreateProfileForm = () => {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           placeholder="Last Name"
-        />
-      </div>
-      <div>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
         />
       </div>
       <div>
