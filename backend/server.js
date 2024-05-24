@@ -15,25 +15,40 @@ sequelize.authenticate()
     });
 
 // Define models using Sequelize
-const item = sequelize.define('item', {
-  
-FirstName: {type:DataTypes.STRING},
-LastName: {type:DataTypes.STRING},
-FullName: {type:DataTypes.INTEGER},
-Username:  {type:DataTypes.STRING},
-Password:  {type:DataTypes.STRING},
-LoginInfo: {type:DataTypes.INTEGER},
-UserProfile:{type:DataTypes.INTEGER},
-});
+const models = {};
+
+// Define the models dynamically
+const defineModels = () => {
+  const tables = {
+      item: {
+          FirstName: { type: DataTypes.STRING },
+          LastName: { type: DataTypes.STRING },
+          FullName: { type: DataTypes.INTEGER },
+          Username: { type: DataTypes.STRING },
+          Password: { type: DataTypes.STRING },
+          LoginInfo: { type: DataTypes.INTEGER },
+          UserProfile: { type: DataTypes.INTEGER },
+      },
+      // Define more tables here if needed
+  };
+
+  for (const [tableName, tableAttributes] of Object.entries(tables)) {
+      models[tableName] = sequelize.define(tableName, tableAttributes);
+  }
+};
 
 // Sync models with the database
-sequelize.sync()
-  .then(() => {
-    console.log('Database synced successfully');
-  })
-  .catch(err => {
-    console.error('Unable to sync database:', err);
-  });
+const syncModels = async () => {
+  try {
+      await sequelize.sync();
+      console.log('Database synced successfully');
+  } catch (err) {
+      console.error('Unable to sync database:', err);
+  }
+};
+
+defineModels();
+syncModels();
 
 // Create an instance of Express
 const app = express();
@@ -46,18 +61,41 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-app.get('/api/items')//Link the user will search (prefix is the clever cloud domain)
-    async (req, res) => { //Controller function.
-        try {
-            // findAll() adds the exclude fields by default
-            const allItems = await item.findAll({ attributes: { exclude: ['id', 'createdAt', 'updatedAt'] } });
-            console.log('Got the items:', allItems);
-            res.json(allItems); // Send fetched items back to the client, display the json
-        } catch (error) {
-            console.error("Couldn't fetch items:", error);
-            res.status(500).json({ error: "Internal server error" }); // Send error response
-        }
-    };
+app.get('/api/:tableName', async (req, res) => {
+  const { tableName } = req.params;
+  const Model = models[tableName];
+  if (!Model) {
+      return res.status(404).json({ error: 'Table not found' });
+  }
+  try {
+      // findAll() adds the exclude fields by default
+      const allItems = await Model.findAll({ attributes: { exclude: ['id', 'createdAt', 'updatedAt'] } });
+      console.log('Got the items:', allItems);
+      res.json(allItems); // Send fetched items back to the client, display the json
+  } catch (error) {
+      console.error("Couldn't fetch items:", error);
+      res.status(500).json({ error: "Internal server error" }); // Send error response
+  }
+});
+
+//adds items to a specific table
+    app.post('/api/:tableName', async (req, res) => {
+      const { tableName } = req.params;
+      const Model = models[tableName];
+      if (!Model) {
+          return res.status(404).json({ error: 'Table not found' });
+      }
+      try {
+          // Create a new item in the specified table using data from the request body
+          const newItem = await Model.create(req.body);
+          console.log('Added new item:', newItem);
+          res.status(201).json(newItem); // Send the newly created item back to the client
+      } catch (error) {
+          console.error("Couldn't add new item:", error);
+          res.status(500).json({ error: "Internal server error" }); // Send error response
+      }
+  });
+
 
 // Start the server
 const PORT = process.env.PORT || 3306;
