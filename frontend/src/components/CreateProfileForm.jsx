@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// This peice is used to create a new profile from each new user.
 const CreateProfileForm = () => {
   const [newUsername, setNewUsername] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -7,12 +8,16 @@ const CreateProfileForm = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  // This part of the code is to check the input before the 
+  // information is put in the server.
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (newPassword !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
+    // This part gathers the information and creats a profile with the input data
+    // which then is stored in the server.
     try {
       const response = await fetch('http://localhost:3306/create-profile', {
         method: 'POST',
@@ -26,6 +31,7 @@ const CreateProfileForm = () => {
           newPassword,
         }),
       });
+      // this part is check the respoce of the server from the new profiles.
       if (response.ok) {
         const data = await response.text();
         alert(data);
@@ -37,6 +43,8 @@ const CreateProfileForm = () => {
     }
   };
 
+  // for the rest of the code is to make the inputs into forms for the 
+  // new profiles.
   return (
     <form onSubmit={handleSubmit}>
       <div>

@@ -1,4 +1,6 @@
 module.exports = {
+  //This peice of  the code is the first part of a 
+  // configuration file that finds problems and potential ones to fix.
   root: true,
   env: { browser: true, es2020: true },
   extends: [
@@ -7,6 +9,8 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
+  //This prat of the program is to be more persice in the rules that govern
+  // the program. In this part is used for diectories to users.
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
