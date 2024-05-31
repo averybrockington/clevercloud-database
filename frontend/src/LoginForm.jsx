@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './index.css';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -23,8 +24,8 @@ const LoginForm = () => {
 
       if (response.ok && data.success) {
         alert('Login successful');
-        //redirect to another page like the profiles dashboard
-        window.location.href = '/dashboard';
+        //optionally redirect to another page like the profiles dashboard
+        //window.location.href = '/dashboard';
       } else {
         setError(data.message || 'Error logging in');
       }
@@ -35,7 +36,8 @@ const LoginForm = () => {
 
   return (
     <div className = "login-form">
-      <h2>Login</h2>
+      <h1>User Login</h1>
+      <p>Log in to view account data</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
