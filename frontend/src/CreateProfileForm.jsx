@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './index.css';
 //ZB
+
 // This peice is used to create a new profile from each new user.
 const CreateProfileForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -9,6 +11,7 @@ const CreateProfileForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   // This part of the code is to check the input before the 
   // information is put in the server.
@@ -38,7 +41,7 @@ const CreateProfileForm = () => {
       if (response.ok && data.success) {
         alert('Profile created successfully!');
         //optionally redirect to another page
-        //window.location.href = '/dashboard';
+        navigate('/dashboard');
       } else {
         setError(data.message || 'Error creating profile');
       }

@@ -1,15 +1,17 @@
 import React from 'react';
-import LoginForm from './LoginForm.jsx';
-import CreateProfileForm from './CreateProfileForm.jsx';
-import './App.css'; // Import any styles for the App component
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import Dashboard from './Dashboard';
 //ZB
+
 function App() {
   return (
-    <div className="App">
-      <h1>User Information</h1>
-      <LoginForm /> {/* Login form component */}
-      <CreateProfileForm /> {/* Profile creation form component */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 

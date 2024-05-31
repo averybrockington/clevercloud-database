@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './index.css';
 //ZB
+
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
 
   const handleSubmit = async (event) => {
@@ -25,12 +28,14 @@ const LoginForm = () => {
       if (response.ok && data.success) {
         alert('Login successful');
         //optionally redirect to another page like the profiles dashboard
-        //window.location.href = '/dashboard';
+        navigate('/dashboard');
       } else {
         setError(data.message || 'Error logging in');
+        navigate('/dashboard');
       }
     } catch (error) {
       setError('Error logging in');
+      navigate('/dashboard');
     }
   };
 
