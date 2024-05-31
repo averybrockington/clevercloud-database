@@ -9,7 +9,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
-  //This prat of the program is to be more persice in the rules that govern
+  //This part of the program is to be more persice in the rules that govern
   // the program. In this part is used for diectories to users.
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
