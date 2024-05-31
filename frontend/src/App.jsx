@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginForm from './components/LoginForm.jsx';
-import CreateProfileForm from './components/CreateProfileForm.jsx';
+import LoginForm from './LoginForm.jsx';
+import CreateProfileForm from './CreateProfileForm.jsx';
 import './App.css'; // Import any styles for the App component
 
 function App() {
