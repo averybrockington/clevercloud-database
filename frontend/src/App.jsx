@@ -6,7 +6,7 @@ import './App.css'; // Import any styles for the App component
 function App() {
   return (
     <div className="App">
-      <title>User Information</title>
+      <h1>User Information</h1>
       <LoginForm /> {/* Login form component */}
       <CreateProfileForm /> {/* Profile creation form component */}
     </div>

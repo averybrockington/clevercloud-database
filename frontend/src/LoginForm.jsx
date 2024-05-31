@@ -36,8 +36,8 @@ const LoginForm = () => {
 
   return (
     <div className = "login-form">
-      <h1>User Login</h1>
-      <p>Log in to view account data</p>
+      <h2>User Login</h2>
+      <h4>Log in to view account data</h4>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>

@@ -51,7 +51,8 @@ const CreateProfileForm = () => {
   // new profiles.
   return (
     <div className="create-profile-form">
-      <h1>Create New Profile</h1>
+      <h2>Create New Profile</h2>
+      <h4>Enter the following information to create a new profile</h4>
       <form onSubmit={handleSubmit}>
       <div>
           <label htmlFor="firstName">First Name:</label>
