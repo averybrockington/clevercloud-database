@@ -48,7 +48,7 @@ app.post('/create-profile', (req, res) => {
   
       // Insert new profile into the database
       connection.query(
-        'INSERT INTO profiles (Username, First_name, Last_name, Password) VALUES (?, ?, ?, ?)',
+        'INSERT INTO profiles (Username, First_Name, Last_Name, Password) VALUES (?, ?, ?, ?)',
         [newUsername, firstName, lastName, newPassword],
         (err, result) => {
           if (err) {
