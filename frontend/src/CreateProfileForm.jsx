@@ -19,7 +19,7 @@ const CreateProfileForm = () => {
     event.preventDefault();
     setError('');
 
-    if (password !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
