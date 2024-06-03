@@ -1,12 +1,12 @@
 const express = require('express');
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Error } = require('sequelize');
 
 // Load environment variables from .env file
 require('dotenv').config();
 
 // Create a Sequelize instance
-const sequelize = new Sequelize("mysql://u07mcepopweif4ln:7b8cboTnbOj8Dx062nSE@btlqpckfuth52y5zn4ue-mysql.services.clever-cloud.com:3306/btlqpckfuth52y5zn4ue");
-sequelize.authenticate()
+const connection = new Sequelize("mysql://u07mcepopweif4ln:7b8cboTnbOj8Dx062nSE@btlqpckfuth52y5zn4ue-mysql.services.clever-cloud.com:3306/btlqpckfuth52y5zn4ue");
+connection.authenticate()
     .then(() => {
         console.log('Connection has been established successfully.');
     })
@@ -14,89 +14,82 @@ sequelize.authenticate()
         console.error('Unable to connect to the database:', error);
     });
 
-// Define models using Sequelize
-const models = {};
-
-// Define the models dynamically
-const defineModels = () => {
-  const tables = {
-      item: {
-          FirstName: { type: DataTypes.STRING },
-          LastName: { type: DataTypes.STRING },
-          FullName: { type: DataTypes.INTEGER },
-          Username: { type: DataTypes.STRING },
-          Password: { type: DataTypes.STRING },
-          LoginInfo: { type: DataTypes.INTEGER },
-          UserProfile: { type: DataTypes.INTEGER },
-      },
-      // Define more tables here if needed
-  };
-
-  for (const [tableName, tableAttributes] of Object.entries(tables)) {
-      models[tableName] = sequelize.define(tableName, tableAttributes);
-  }
-};
-
-// Sync models with the database
-const syncModels = async () => {
-  try {
-      await sequelize.sync();
-      console.log('Database synced successfully');
-  } catch (err) {
-      console.error('Unable to sync database:', err);
-  }
-};
-
-defineModels();
-syncModels();
-
 // Create an instance of Express
 const app = express();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
-// Define routes...
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+//////////////////////////////////////////CREATE NEW PROFILE FUNCTION //////////////////////////////////////////////
 
-app.get('/api/:tableName', async (req, res) => {
-  const { tableName } = req.params;
-  const Model = models[tableName];
-  if (!Model) {
-      return res.status(404).json({ error: 'Table not found' });
-  }
-  try {
-      // findAll() adds the exclude fields by default
-      const allItems = await Model.findAll({ attributes: { exclude: ['id', 'createdAt', 'updatedAt'] } });
-      console.log('Got the items:', allItems);
-      res.json(allItems); // Send fetched items back to the client, display the json
-  } catch (error) {
-      console.error("Couldn't fetch items:", error);
-      res.status(500).json({ error: "Internal server error" }); // Send error response
-  }
-});
+// Route to handle creating a new profile
+app.post('/create-profile', (req, res) => {
+    const { newUsername, firstName, lastName, newPassword } = req.body;
+    const MAX_LENGTH = 45; // Maximum length for VARCHAR columns
 
-//adds items to a specific table
-    app.post('/api/:tableName', async (req, res) => {
-      const { tableName } = req.params;
-      const Model = models[tableName];
-      if (!Model) {
-          return res.status(404).json({ error: 'Table not found' });
+    // Truncate strings if they exceed maximum length
+    newUsername = newUsername.substring(0, MAX_LENGTH);
+    firstName = firstName.substring(0, MAX_LENGTH);
+    lastName = lastName.substring(0, MAX_LENGTH);
+    newPassword = newPassword.substring(0, MAX_LENGTH);
+  
+    // Check if username already exists
+    connection.query('SELECT * FROM profiles WHERE username = ?', [newUsername], (error, results) => {
+      if (error) {
+        console.error('Error querying database: ', error);
+        res.status(500).send('1: Error creating profile' + error.message);
+        return;
       }
-      try {
-          // Create a new item in the specified table using data from the request body
-          const newItem = await Model.create(req.body);
-          console.log('Added new item:', newItem);
-          res.status(201).json(newItem); // Send the newly created item back to the client
-      } catch (error) {
-          console.error("Couldn't add new item:", error);
-          res.status(500).json({ error: "Internal server error" }); // Send error response
+  
+      if (results.length > 0) {
+        res.status(400).send('Username already exists');
+        return;
       }
+  
+      // Insert new profile into the database
+      connection.query(
+        'INSERT INTO profiles (Username, First_name, Last_name, Password) VALUES (?, ?, ?, ?)',
+        [newUsername, firstName, lastName, newPassword],
+        (err, result) => {
+          if (err) {
+            console.error('Error inserting into database: ', err);
+            res.status(500).send('Error creating profile: unable to alter database' + err.message);
+            return;
+          }
+          res.status(201).send('Profile created successfully');
+        }
+      );
+    });
   });
+  
 
+////////////////////////////////////////LOGIN FUNCTION///////////////////////////////////////
 
+// Route to handle user login
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+  
+    // Query the database to find the user with the given username and password
+    connection.query(
+      'SELECT * FROM profiles WHERE username = ? AND password = ?',
+      [username, password],
+      (error, results) => {
+        if (error) {
+          console.error('Error querying database: ', error);
+          res.status(500).send('Error logging in');
+          return;
+        }
+  
+        // Check if a user with the given username and password exists
+        if (results.length === 1) {
+          res.status(200).send('Login successful');
+        } else {
+          res.status(401).send('Invalid username or password');
+        }
+      }
+    );
+  });
+  
 // Start the server
 const PORT = process.env.PORT || 3306;
 app.listen(PORT, () => {
