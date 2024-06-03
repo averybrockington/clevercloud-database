@@ -34,9 +34,9 @@ const CreateProfileForm = () => {
         body: JSON.stringify({ newUsername, firstName, lastName, newPassword }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      //if (!response.ok) {
+      //  throw new Error(`HTTP error! status: ${response.status}`);
+     // }
       const data = await response.json();
 
       // this part is check the respoce of the server from the new profiles.
@@ -48,7 +48,9 @@ const CreateProfileForm = () => {
         setError(data.message || 'Error creating profile (frontend 1)');
       }
     } catch (error) {
-      setError('Error creating profile (frontend 2)');
+      setError('Error creating profile (frontend 2, really a backend thing) ');
+     // throw new Error(`HTTP error! status: ${response.status}`);
+      //throw new Error(`HTTP error! status: ${error.message}`);
       //navigate('/dashboard');
     }
   };
