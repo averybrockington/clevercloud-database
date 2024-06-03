@@ -42,10 +42,10 @@ const CreateProfileForm = () => {
         //optionally redirect to another page
         navigate('/dashboard');
       } else {
-        setError(data.message || 'Error creating profile');
+        setError(data.message || 'Error creating profile (frontend 1)');
       }
     } catch (error) {
-      setError('Error creating profile');
+      setError('Error creating profile (frontend 2)');
       //navigate('/dashboard');
     }
   };
