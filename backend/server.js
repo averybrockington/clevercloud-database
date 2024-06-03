@@ -1,6 +1,6 @@
 const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
-//const cors = require('cors');
+const cors = require('cors');
 require('dotenv').config();
  
 // Create a Sequelize instance
@@ -58,7 +58,7 @@ sequelize.sync()
 const app = express();
  
 // Middleware to parse JSON request bodies
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
  
 // Route to handle creating a new profile
@@ -109,7 +109,7 @@ app.post('/login', async (req, res) => {
         }
     } catch (error) {
         console.error('Error logging in:', error);
-        res.status(500).json({ success: false, message: 'Error logging in' });
+        res.status(500).json({ success: false, message: 'Error logging in (backend 2)' });
     }
 });
  

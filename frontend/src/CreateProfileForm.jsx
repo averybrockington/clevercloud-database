@@ -49,7 +49,7 @@ const CreateProfileForm = () => {
       }
     } catch (error) {
       setError('Error creating profile (frontend 2, really a backend thing) ');
-     // throw new Error(`HTTP error! status: ${response.status}`);
+      //throw new Error(`HTTP error! status: ${response.status}`);
       //throw new Error(`HTTP error! status: ${error.message}`);
       //navigate('/dashboard');
     }
