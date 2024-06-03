@@ -34,6 +34,9 @@ const CreateProfileForm = () => {
         body: JSON.stringify({ newUsername, firstName, lastName, newPassword }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
 
       // this part is check the respoce of the server from the new profiles.
