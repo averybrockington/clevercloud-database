@@ -88,7 +88,7 @@ const CreateProfileForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="anewPssword">Password:</label>
+          <label htmlFor="newPssword">Password:</label>
           <input
             type="password"
             id="newPassword"
