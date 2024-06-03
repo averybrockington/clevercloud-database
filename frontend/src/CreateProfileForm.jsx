@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 //ZB
-
+ 
 // This peice is used to create a new profile from each new user.
 const CreateProfileForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,13 +12,13 @@ const CreateProfileForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
-  // This part of the code is to check the input before the 
+ 
+  // This part of the code is to check the input before the
   // information is put in the server.
   const handleProfileCreation = async (event) => {
     event.preventDefault();
     setError('');
-
+ 
     if (newPassword !== confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -33,12 +33,12 @@ const CreateProfileForm = () => {
         },
         body: JSON.stringify({ newUsername, firstName, lastName, newPassword }),
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+ 
+      //if (!response.ok) {
+      //  throw new Error(`HTTP error! status: ${response.status}`);
+     // }
       const data = await response.json();
-
+ 
       // this part is check the respoce of the server from the new profiles.
       if (response.ok && data.success) {
         alert('Profile created successfully!');
@@ -48,12 +48,14 @@ const CreateProfileForm = () => {
         setError(data.message || 'Error creating profile (frontend 1)');
       }
     } catch (error) {
-      setError('Error creating profile (frontend 2)');
+      setError('Error creating profile (frontend 2, really a backend thing) ');
+     // throw new Error(`HTTP error! status: ${response.status}`);
+      //throw new Error(`HTTP error! status: ${error.message}`);
       //navigate('/dashboard');
     }
   };
-
-  // for the rest of the code is to make the inputs into forms for the 
+ 
+  // for the rest of the code is to make the inputs into forms for the
   // new profiles.
   return (
     <div className="create-profile-form">
@@ -116,5 +118,5 @@ const CreateProfileForm = () => {
     </div>
   );
 };
-
+ 
 export default CreateProfileForm;
