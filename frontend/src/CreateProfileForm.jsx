@@ -20,7 +20,7 @@ const CreateProfileForm = () => {
     setError('');
 
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match');
       return;
     }
     // This part gathers the information and creats a profile with the input data
