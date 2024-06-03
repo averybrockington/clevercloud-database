@@ -76,7 +76,7 @@ app.post('/login', (req, res) => {
       (error, results) => {
         if (error) {
           console.error('Error querying database: ', error);
-          res.status(500).send('Error logging in');
+          res.status(500).send('Error logging in (backend)');
           return;
         }
   

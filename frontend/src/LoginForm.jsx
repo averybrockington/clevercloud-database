@@ -10,7 +10,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
 
-  const handleSubmit = async (event) => {
+  const handleLoginForm = async (event) => {
     event.preventDefault();
     setError('');
 
@@ -30,12 +30,12 @@ const LoginForm = () => {
         //optionally redirect to another page like the profiles dashboard
         navigate('/dashboard');
       } else {
-        setError(data.message || 'Error logging in');
-        navigate('/dashboard');
+        setError(data.message || 'Error logging in (frontend 1)');
+        //navigate('/dashboard');
       }
     } catch (error) {
-      setError('Error logging in');
-      navigate('/dashboard');
+      setError('Error logging in (frontend 2)');
+      //navigate('/dashboard');
     }
   };
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
     <div className = "login-form">
       <h2>User Login</h2>
       <h4>Log in to view account data</h4>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLoginForm}>
         <div>
           <label htmlFor="username">Username:</label>
           <input

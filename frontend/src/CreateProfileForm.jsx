@@ -15,7 +15,7 @@ const CreateProfileForm = () => {
 
   // This part of the code is to check the input before the 
   // information is put in the server.
-  const handleSubmit = async (event) => {
+  const handleProfileCreation = async (event) => {
     event.preventDefault();
     setError('');
 
@@ -31,8 +31,7 @@ const CreateProfileForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({username, firstName, lastName, password,
-        }),
+        body: JSON.stringify({ username, firstName, lastName, password }),
       });
 
       const data = await response.json();
@@ -47,6 +46,7 @@ const CreateProfileForm = () => {
       }
     } catch (error) {
       setError('Error creating profile');
+      //navigate('/dashboard');
     }
   };
 
@@ -56,7 +56,7 @@ const CreateProfileForm = () => {
     <div className="create-profile-form">
       <h2>Create New Profile</h2>
       <h4>Enter the following information to create a new profile</h4>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleProfileCreation}>
       <div>
           <label htmlFor="firstName">First Name:</label>
           <input
