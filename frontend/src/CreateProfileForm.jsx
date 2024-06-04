@@ -46,6 +46,7 @@ const CreateProfileForm = () => {
         navigate('/dashboard');
       } else {
         setError(data.message || 'Error creating profile (frontend 1)');
+        //navigate('/dashboard');
       }
     } catch (error) {
       setError('Error creating profile (frontend 2, really a backend thing) ');
