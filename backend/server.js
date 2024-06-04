@@ -16,11 +16,6 @@ sequelize.authenticate()
  
 // Define Profile model
 const Profile = sequelize.define('Profile', {
-  userId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-  },
   username: {
       type: DataTypes.STRING,
       allowNull: false,
