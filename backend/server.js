@@ -21,8 +21,8 @@ const Profile = sequelize.define('Profile', {
     type: DataTypes.INTEGER,
     allowNull:false,
     unique: true, 
-    primaryKey: true
-    //autoIncrement: true
+    primaryKey: true,
+    autoIncrement: true
   },
   username: {
       type: DataTypes.STRING,
