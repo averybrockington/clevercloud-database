@@ -112,7 +112,7 @@ app.post('/login', async (req, res) => {
         }
     } catch (error) {
         console.error('Error logging in:', error);
-        res.status(500).json({ success: false, message: 'Error logging in (backend 2)' });
+        res.status(500).json({ success: false, message: 'Invalid username or password' });
     }
 });
  
