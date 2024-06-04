@@ -1,6 +1,7 @@
 const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 const cors = require('cors');
+const { INTEGER } = require('sequelize/lib/data-types');
 require('dotenv').config();
  
 // Create a Sequelize instance
@@ -16,6 +17,13 @@ sequelize.authenticate()
  
 // Define Profile model
 const Profile = sequelize.define('Profile', {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull:false,
+    unique: true, 
+    primaryKey: true
+    //autoIncrement: true
+  },
   username: {
       type: DataTypes.STRING,
       allowNull: false,
