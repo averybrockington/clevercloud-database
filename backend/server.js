@@ -83,14 +83,24 @@ app.post('/create-profile', async (req, res) => {
         }
  
         // Create new profile
-        await Profile.create({
+        const newProfile = await Profile.create({
             username: truncatedUsername,
             firstName: truncatedFirstName,
             lastName: truncatedLastName,
             password: truncatedPassword
         });
- 
-        res.status(201).json({ success: true, message: 'Profile created successfully!' });
+
+        // Return newly created profile data
+        res.status(201).json({ 
+            success: true, 
+            message: 'Profile created successfully!',
+            user: {
+                id: newProfile.id,
+                username: newProfile.username,
+                firstName: newProfile.firstName,
+                lastName: newProfile.lastName
+            }
+        });
     } catch (error) {
         console.error('Error creating profile(backend 1):', error);
         res.status(500).json({ success: false, message: 'Error creating profile (backend 1.1)' });
@@ -106,7 +116,16 @@ app.post('/login', async (req, res) => {
         const profile = await Profile.findOne({ where: { username, password } });
  
         if (profile) {
-            res.status(200).json({ success: true, message: 'Login successful' });
+            // Send user data in response
+            res.status(200).json({ 
+                success: true, 
+                message: 'Login successful', 
+                user: {
+                    username: profile.username,
+                    firstName: profile.firstName,
+                    lastName: profile.lastName
+                }
+            });
         } else {
             res.status(401).json({ success: false, message: 'Invalid username or password' });
         }

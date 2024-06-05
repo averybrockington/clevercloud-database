@@ -42,7 +42,7 @@ const CreateProfileForm = () => {
       // this part is check the respoce of the server from the new profiles.
       if (response.ok && data.success) {
         alert('Profile created successfully!');
-        //optionally redirect to another page
+        localStorage.setItem('user', JSON.stringify(data.user));
         navigate('/dashboard');
       } else {
         setError(data.message || 'Error creating profile (frontend 1)');

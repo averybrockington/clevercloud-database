@@ -1,25 +1,45 @@
-import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import './index.css';
 //ZB
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-    const navigate = useNavigate();
-    const [error, setError] = useState('');
-    const handleLogout = () => {
-        navigate('/');
-    };
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-    return (
-    <div className = "dashboard">
-        <h1>User Dashboard</h1>
-        <h2>User Overview</h2>
-        <h3>Etc...</h3>
-        <button onClick={handleLogout}>Logout</button>
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user');
+    console.log('Retrieved user data from localStorage:', loggedInUser); // Debugging line
+    if (loggedInUser) {
+      try {
+        const parsedUser = JSON.parse(loggedInUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        localStorage.removeItem('user');
+        navigate('/');
+      }
+    } else {
+      console.error('No user data found in localStorage');
+      navigate('/');
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h2>Welcome, {user.firstName} {user.lastName}!</h2>
+      <p>Username: {user.username}</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
-
-
 
 export default Dashboard;

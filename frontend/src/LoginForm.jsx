@@ -27,7 +27,8 @@ const LoginForm = () => {
 
       if (response.ok && data.success) {
         alert('Login successful');
-        //optionally redirect to another page like the profiles dashboard
+        localStorage.setItem('user', JSON.stringify(data.user));
+        console.log('Stored user data:', localStorage.getItem('user')); // Debugging line
         navigate('/dashboard');
       } else {
         setError(data.message || 'Error logging in (frontend 1)');
